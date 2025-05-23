@@ -295,7 +295,7 @@ function FormID() {
                         />
                     ) : (
                         <img
-                            src="./public/img.png"
+                            src="img.png"
                             className="absolute z-2 min-h-[375px] w-60 cursor-pointer"
                             onClick={() => document.getElementById('picture-upload').click()}
                         />
@@ -319,7 +319,7 @@ function FormID() {
                         />
                     ) : (
                         <img
-                            src="./public/logo.png"
+                            src="logo.png"
                             className="absolute z-5 left-0 m-2! max-h-[45px] cursor-pointer"
                             onClick={() => document.getElementById('logo-upload').click()}
                         />
