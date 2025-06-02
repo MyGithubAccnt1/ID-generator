@@ -126,18 +126,27 @@ function FormID() {
 
     const captureDivsSeparately = async () => {
         setDownloading(true);
+        
         const div1 = document.getElementById('frontID');
-        // const div2 = document.getElementById('backID');
+        const div2 = document.getElementById('backID');
+        const saveRotation = setRotationY;
+
+        setRotationY(0);
         await new Promise(resolve => setTimeout(resolve, 100));
         html2canvas(div1).then(canvas1 => {
             const imgData1 = canvas1.toDataURL('image/png');
             downloadImage(imgData1, 'Front-ID.png');
         });
 
-        // html2canvas(div2).then(canvas2 => {
-        //     const imgData2 = canvas2.toDataURL('image/png');
-        //     downloadImage(imgData2, 'Back-ID.png');
-        // });
+        setRotationY(180);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        html2canvas(div2).then(canvas2 => {
+            const imgData2 = canvas2.toDataURL('image/png');
+            downloadImage(imgData2, 'Back-ID.png');
+        });
+
+        setRotationY(saveRotation);
+        await new Promise(resolve => setTimeout(resolve, 100));
     }
 
     function downloadImage(dataUrl, filename) {
@@ -171,67 +180,71 @@ function FormID() {
             <IDWrapper style={style1}>
                 <IDHole/>
                 <IDBody id="backID">
-                    <div className="absolute z-5 left-0 m-2! text-black text-left">
-                        <table className="table-auto border-separate border-spacing-x-2">
+                    <div style={{ position: 'absolute', zIndex: 5, left: '0', margin: '10px', color: '#000', textAlign: 'left' }}>
+                        <table style={{ tableLayout: 'auto' }}>
                             <tbody>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">SSS No.:</td>
-                                    <td className="text-[11px] font-normal align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>SSS No.:</td>
+                                    <td style={{ fontSize: '11px', fontWeight: '400', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">TIN No.:</td>
-                                    <td className="text-[11px] font-normal align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>TIN No.:</td>
+                                    <td style={{ fontSize: '11px', fontWeight: '400', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">Birth Date:</td>
-                                    <td className="text-[11px] ont-normal align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>Birth Date:</td>
+                                    <td style={{ fontSize: '11px', fontWeight: '400', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">Address:</td>
-                                    <td className="text-[11px] font-normal align-top">
-                                        <textarea className="resize-none min-h-[55px]" placeholder="|"></textarea>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'top' }}>Address:</td>
+                                    <td style={{ fontSize: '11px', fontWeight: '400', verticalAlign: 'top' }}>
+                                        <textarea style={{ resize: 'none', height: '35px' }} placeholder="|"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] italic text-center py-3!" colSpan={2}>Incase of emergency, please notify:</td>
-                                </tr>
-                                <tr>
-                                    <td className="text-[12px] font-bold align-top">Name:</td>
-                                    <td className="text-[12px] font-bold align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td colSpan={2}
+                                    style={{ fontSize: '12px', fontStyle: 'italic', textAlign: 'center', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}
+                                    >
+                                        Incase of emergency, please notify:
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">Relationship:</td>
-                                    <td className="text-[12px] font-bold align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>Name:</td>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] font-bold align-top">Contact No.:</td>
-                                    <td className="text-[12px] font-bold align-top">
-                                        <input type="text" placeholder="|"/>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>Relationship:</td>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-[12px] italic text-center pt-2!" colSpan={2}>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>Contact No.:</td>
+                                    <td style={{ fontSize: '12px', fontWeight: '700', verticalAlign: 'center' }}>
+                                        <input type="text" style={{ height: '25px' }} placeholder="|"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style={{ fontSize: '10px', fontStyle: 'italic', textAlign: 'center', paddingTop: '0.5rem' }} colSpan={2}>
                                         This is to certify that the person whose picture and signature appear hereon is an employee of SalesMed Pharmacy. In case of loss, please return to the Tanza Office address below.
-                                        <div className="border border-x-0 border-b-0 border-2 w-[75%] mx-auto! mt-[50px]! mb-3!">
-                                            <p className="text-[12px] font-bold not-italic">
-                                                <input type="text" className="text-center" placeholder="NAME"/>
+                                        <div style={{ borderStyle: 'solid', borderTopWidth: '2px', borderLeftWidth: '0', borderRightWidth: '0', borderBottomWidth: '0', width: '75%', marginLeft: 'auto', marginRight: 'auto', marginTop: '30px' }}>
+                                            <p style={{ fontSize: '11px', fontWeight: '700', fontStyle: 'normal' }}>
+                                                <input type="text" style={{ textAlign: 'center', height: '25px' }} placeholder="NAME"/>
                                             </p>
-                                            <p className="text-[10px] font-bold not-italic">
-                                                <input type="text" className="text-center" placeholder="JOB TITLE"/>
+                                            <p style={{ fontSize: '10px', fontWeight: '700', fontStyle: 'normal' }}>
+                                                <input type="text" style={{ textAlign: 'center', height: '25px' }} placeholder="JOB TITLE"/>
                                             </p>
                                         </div>
-                                        <p className="text-[10px] not-italic">
-                                            <textarea className="resize-none min-h-[35px] text-center" placeholder="Business Location"></textarea>
+                                        <p style={{ fontSize: '10px', fontStyle: 'normal' }}>
+                                            <textarea style={{ resize: 'none', height: '30px', textAlign: 'center', width: '100%' }} placeholder="Business Location"></textarea>
                                         </p>
                                     </td>
                                 </tr>
